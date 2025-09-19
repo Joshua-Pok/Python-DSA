@@ -1,3 +1,4 @@
+from collections import deque
 class GraphAdjList: 
     def __init__(self):
         self.graph = {}
@@ -13,3 +14,19 @@ class GraphAdjList:
     def display(self):
         for vertex in self.graph:
             print(vertex, "->",  self.graph[vertex])
+
+
+    def BFS(self, start):
+        visited = set()
+        queue = deque([start]) # Creates a list with one element, starting node.
+        result = []
+
+        while queue:
+            vertex = queue.popleft();
+            if vertex not in visited:
+                visited.add(vertex)
+                result.append(vertex)
+                queue.extend(self.graph[vertex]) #append children to the queue
+        return result
+
+
